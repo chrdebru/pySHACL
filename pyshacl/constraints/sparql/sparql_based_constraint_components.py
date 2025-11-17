@@ -246,7 +246,7 @@ class AskConstraintValidator(SPARQLConstraintComponentValidator):
         endpoint = os.environ["PYSHACL_SHACL_DS_SERVICE_ENDPOINT"]
         self.query_text = f"""
             ASK {{
-                SERVICE <{endpoint}}> {{
+                SERVICE <{endpoint}> {{
                     {ask_val.value}
                 }}
             }}
@@ -319,7 +319,7 @@ class SelectConstraintValidator(SPARQLConstraintComponentValidator):
         self.query_text = 
             wrapped_query = f"""
                 SELECT * WHERE {{
-                    SERVICE <{endpoint}}> {{
+                    SERVICE <{endpoint}> {{
                         {select_val.value}
                     }}
                 }}
