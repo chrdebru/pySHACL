@@ -244,13 +244,15 @@ class AskConstraintValidator(SPARQLConstraintComponentValidator):
             )
 
         endpoint = os.environ["PYSHACL_SHACL_DS_SERVICE_ENDPOINT"]
-        self.query_text = f"""
-            ASK {{
-                SERVICE <{endpoint}> {{
+        # We are using our implementation of py-shacl-ds
+        if endpoint:
+            self.query_text = f"""
+                ASK {{
                     {ask_val.value}
                 }}
-            }}
-        """
+            """
+        else:
+            self.query_text = ask_val.value
 
     def validate(
         self, executor: SHACLExecutor, focus, value_nodes, target_graph, query_helper=None, new_bind_vals=None
@@ -316,13 +318,17 @@ class SelectConstraintValidator(SPARQLConstraintComponentValidator):
             )
 
         endpoint = os.environ["PYSHACL_SHACL_DS_SERVICE_ENDPOINT"]
-        self.query_text = f"""
+        # We are using our implementation of py-shacl-ds
+        if endpoint:
+            self.query_text = f"""
                 SELECT * WHERE {{
                     SERVICE <{endpoint}> {{
                         {select_val.value}
                     }}
                 }}
             """
+        else:
+            self.query_text = select_val.value
 
     def validate(self, executor, focus, value_nodes, target_graph, query_helper=None, new_bind_vals=None):
         """
