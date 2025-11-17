@@ -316,8 +316,7 @@ class SelectConstraintValidator(SPARQLConstraintComponentValidator):
             )
 
         endpoint = os.environ["PYSHACL_SHACL_DS_SERVICE_ENDPOINT"]
-        self.query_text = 
-            wrapped_query = f"""
+        self.query_text = f"""
                 SELECT * WHERE {{
                     SERVICE <{endpoint}> {{
                         {select_val.value}
