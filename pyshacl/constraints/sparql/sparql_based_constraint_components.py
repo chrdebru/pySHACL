@@ -243,7 +243,7 @@ class AskConstraintValidator(SPARQLConstraintComponentValidator):
                 "https://www.w3.org/TR/shacl/#ConstraintComponent",
             )
 
-        endpoint = os.environ.get("PYSHACL_SHACL_DS_SERVICE_ENDPOINT")
+        endpoint = os.environ["PYSHACL_SHACL_DS_SERVICE_ENDPOINT"]
         self.query_text = f"""
             ASK {{
                 SERVICE <{endpoint}}> {{
@@ -315,7 +315,7 @@ class SelectConstraintValidator(SPARQLConstraintComponentValidator):
                 "https://www.w3.org/TR/shacl/#ConstraintComponent",
             )
 
-        endpoint = os.environ.get("PYSHACL_SHACL_DS_SERVICE_ENDPOINT")
+        endpoint = os.environ["PYSHACL_SHACL_DS_SERVICE_ENDPOINT"]
         self.query_text = 
             wrapped_query = f"""
                 SELECT * WHERE {{
