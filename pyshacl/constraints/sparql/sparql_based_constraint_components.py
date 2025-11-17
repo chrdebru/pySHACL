@@ -242,7 +242,15 @@ class AskConstraintValidator(SPARQLConstraintComponentValidator):
                 "AskValidator sh:ask must be an RDF Literal of type xsd:string.",
                 "https://www.w3.org/TR/shacl/#ConstraintComponent",
             )
-        self.query_text = ask_val.value
+
+        endpoint = os.environ.get("PYSHACL_SHACL_DS_SERVICE_ENDPOINT")
+        self.query_text = f"""
+            ASK {{
+                SERVICE <{endpoint}}> {{
+                    {ask_val.value}
+                }}
+            }}
+        """
 
     def validate(
         self, executor: SHACLExecutor, focus, value_nodes, target_graph, query_helper=None, new_bind_vals=None
@@ -306,7 +314,16 @@ class SelectConstraintValidator(SPARQLConstraintComponentValidator):
                 "SelectValidator sh:select must be an RDF Literal of type xsd:string.",
                 "https://www.w3.org/TR/shacl/#ConstraintComponent",
             )
-        self.query_text = select_val.value
+
+        endpoint = os.environ.get("PYSHACL_SHACL_DS_SERVICE_ENDPOINT")
+        self.query_text = 
+            wrapped_query = f"""
+                SELECT * WHERE {{
+                    SERVICE <{endpoint}}> {{
+                        {select_val.value}
+                    }}
+                }}
+            """
 
     def validate(self, executor, focus, value_nodes, target_graph, query_helper=None, new_bind_vals=None):
         """
