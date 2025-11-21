@@ -224,8 +224,8 @@ class SPARQLQueryHelper(object):
         if has_values:
             raise ValidationFailure("A SPARQL Constraint must not contain a VALUES clause.")
         has_service = self.has_service_regex.search(sparql_text)
-        if has_service:
-            raise ValidationFailure("A SPARQL Constraint must not contain a federated query (SERVICE).")
+        #if has_service:
+        #    raise ValidationFailure("A SPARQL Constraint must not contain a federated query (SERVICE).")
         potentially_prebound_variables = {'this', 'shapesGraph', 'currentShape'}
         if valuenode is not None:
             potentially_prebound_variables.add('value')
